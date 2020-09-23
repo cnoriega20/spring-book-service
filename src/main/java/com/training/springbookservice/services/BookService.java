@@ -1,6 +1,6 @@
 package com.training.springbookservice.services;
 
-import com.training.domain.Book;
+import com.training.springbookservice.domain.Book;
 
 import java.util.List;
 
