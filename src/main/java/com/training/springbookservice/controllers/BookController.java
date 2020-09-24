@@ -35,14 +35,14 @@ public class BookController {
         return new ResponseEntity(bookMapper.mapBookAsBookDTO(book), HttpStatus.OK);
     }
 
-    @GetMapping("/books{bookName}")
+    @GetMapping("/books/{bookName}")
     public ResponseEntity<BookDTO> findBookByName(@PathVariable("bookName") String name){
-            return new ResponseEntity<>(bookMapper.
-                    mapBookAsBookDTO(bookService.findByName(name).get()), HttpStatus.OK);
+        return new ResponseEntity<>(bookMapper.
+                mapBookAsBookDTO(bookService.findByName(name).get()), HttpStatus.OK);
 
     }
 
-    @PostMapping("/storeBooks")
+    @PostMapping("/books")
     public ResponseEntity<BookDTO> saveBook(@RequestBody Book book){
         return new ResponseEntity<>(
                 bookMapper.mapBookAsBookDTO(bookService.save(book)),
@@ -53,7 +53,7 @@ public class BookController {
     public ResponseEntity<BookDTO> updateBook(@RequestBody Book book, @PathVariable("bookId")Long id) {
         return new ResponseEntity<>(
                 bookMapper.mapBookAsBookDTO(
-                    bookService.update(book, id)),
+                        bookService.update(book, id)),
                 HttpStatus.NO_CONTENT);
     }
 
@@ -62,7 +62,4 @@ public class BookController {
     public void deleteBook(@RequestBody Book book, @PathVariable("bookId")Long id){
         bookService.delete(id);
     }
-
-
-
 }
