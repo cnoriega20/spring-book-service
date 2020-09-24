@@ -35,7 +35,7 @@ public class BookController {
         return new ResponseEntity(bookMapper.mapBookAsBookDTO(book), HttpStatus.OK);
     }
 
-    @GetMapping("/books/{bookName}")
+    @GetMapping("/books/byName/{bookName}")
     public ResponseEntity<BookDTO> findBookByName(@PathVariable("bookName") String name){
         return new ResponseEntity<>(bookMapper.
                 mapBookAsBookDTO(bookService.findByName(name).get()), HttpStatus.OK);
