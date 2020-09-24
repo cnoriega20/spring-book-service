@@ -6,7 +6,6 @@ import com.training.springbookservice.repositories.BookRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -19,9 +18,11 @@ public class BookServiceImpl implements BookService {
 
 
     @Override
-    public Optional<Book> findByName(String name) {
-        return Optional.ofNullable(Optional.of(bookRepository.findByName(name)).
-                orElseThrow(() -> new BookNotFoundException(name)));
+    public Book findByName(String name) {
+        return bookRepository.findByName(name);
+        /*return Optional.ofNullable(Optional.of(bookRepository.findByName(name)).
+                orElseThrow(() -> new BookNotFoundException(name)));*/
+
     }
 
     @Override
