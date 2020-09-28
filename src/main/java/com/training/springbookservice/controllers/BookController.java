@@ -12,16 +12,15 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/bookService")
+
 public class BookController {
 
     private final BookService bookService;
 
-    private final BookMapper bookMapper;
+    private  BookMapper bookMapper;
 
-
-    public BookController(BookService bookService, BookMapper bookMapper) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
-        this.bookMapper = bookMapper;
     }
 
     @GetMapping("/books")

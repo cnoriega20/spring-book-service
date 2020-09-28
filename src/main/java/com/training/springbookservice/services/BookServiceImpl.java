@@ -27,7 +27,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(Long id) {
-        return bookRepository.findById(id)
+        return bookRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new BookNotFoundException(id));
 
     }
@@ -44,7 +44,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book update(Book updatedBook, Long id) {
-        return bookRepository.findById(id)
+        return bookRepository.findById(Long.valueOf(id))
                 .map(book -> {
                     book.setName(updatedBook.getName());
                     book.setGenre(updatedBook.getGenre());
