@@ -10,14 +10,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(BookController.class)
@@ -33,6 +32,8 @@ class BookControllerTest {
     ObjectMapper objectMapper;
 
     private List<Book> books;
+
+    private Book book;
 
     @BeforeEach
     void setUp() {
@@ -50,28 +51,60 @@ class BookControllerTest {
                 .writer("Franz Kafka")
                 .year("1856")
                 .build());
+        book = Book.builder()
+                .id(3l)
+                .name("Madame Bovary")
+                .genre("Drama")
+                .writer("Gustave Flaubert")
+                .year("1856")
+                .build();
     }
 
-    @Test
+/*@Test
     void testGetAllBooks() throws Exception {
         given(bookService.findAll()).willReturn(books);
 
-        mockMvc.perform(get("/api/v1/bookService/books").
-                accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect((ResultMatcher) jsonPath("$.size()", books.size()));
-    }
+        mockMvc.perform(get("/api/v1/bookService/books"))
+                        .andExpect(status().isOk());
 
-    @Test
-    void testFindBookById() {
-    }
+    }*/
+
+
+
+/* @Test
+    void testFindBookById() throws Exception {
+        given(bookService.findById(book.getId())).willReturn(book);
+
+        mockMvc.perform(get("api/v1/bookService/books" +
+                book.getId()).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+    }*/
+
 
     @Test
     void testFindBookByName() {
     }
 
     @Test
-    void testSaveBook() {
+    void testSaveBook() throws Exception {
+
+        //        beerDto.setId(null);
+        //        Beer newBeer = Beer.builder().id(UUID.randomUUID()).beerName("Amstel").build();
+        //        String beerToJson = objectMapper.writeValueAsString(beerDto);
+        Book newBook = Book.builder()
+                .id(4l).genre("Horror")
+                .name("Carry").writer("Stephen King")
+                .year("1976").build();
+
+        String bookToJson = objectMapper.writeValueAsString(book);
+        given(bookService.save(any())).willReturn(newBook);
+
+        mockMvc.perform(post("/api/v1/bookService/books")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bookToJson))
+                .andExpect(status().isCreated());
+
     }
 
     @Test

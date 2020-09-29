@@ -1,5 +1,6 @@
 package com.training.springbookservice.mappers;
 
+import com.training.springbookservice.controllers.BookController;
 import com.training.springbookservice.domain.Book;
 import com.training.springbookservice.model.BookDTO;
 import org.mapstruct.Mapper;
@@ -7,11 +8,10 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 
-@Mapper
-
+@Mapper(uses = BookController.class)
 public interface BookMapper {
 
-    Book mapBookDTOAsBook(BookDTO bookDTO);
+    Book mapBookDTOAsBook( BookDTO bookDTO);
 
     BookDTO mapBookAsBookDTO(Book book);
 

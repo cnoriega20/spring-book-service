@@ -3,6 +3,7 @@ package com.training.springbookservice.services;
 import com.training.springbookservice.domain.Book;
 import com.training.springbookservice.exceptions.BookNotFoundException;
 import com.training.springbookservice.repositories.BookRepository;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,12 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> findAll() {
-        return (List<Book>) bookRepository.findAll();
+        List<Book> books = bookRepository.findAll();
+        if (CollectionUtils.isNotEmpty(books)){
+            return (List<Book>) bookRepository.findAll();
+        }
+
+        return null;
     }
 
     @Override

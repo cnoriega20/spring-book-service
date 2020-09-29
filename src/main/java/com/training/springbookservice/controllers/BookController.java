@@ -4,6 +4,7 @@ import com.training.springbookservice.domain.Book;
 import com.training.springbookservice.mappers.BookMapper;
 import com.training.springbookservice.model.BookDTO;
 import com.training.springbookservice.services.BookService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,20 +13,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/bookService")
-
+//@RequiredArgsConstructor
 public class BookController {
 
     private final BookService bookService;
 
-    private  BookMapper bookMapper;
+    private final BookMapper bookMapper;
 
-    public BookController(BookService bookService) {
+    public BookController(BookService bookService, BookMapper bookMapper) {
         this.bookService = bookService;
+        this.bookMapper = bookMapper;
     }
+
 
     @GetMapping("/books")
     public ResponseEntity<List<BookDTO>> getAllBooks(){
-        return new ResponseEntity(bookMapper.booksToBookDTOList(bookService.findAll()), HttpStatus.OK);
+        if(CollectionUtils.isNotEmpty(bookService.findAll()))
+            return new ResponseEntity(bookMapper.booksToBookDTOList(bookService.findAll()), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 
     @GetMapping("/books/{bookId}")
