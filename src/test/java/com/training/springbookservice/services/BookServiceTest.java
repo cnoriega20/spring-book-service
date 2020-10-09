@@ -86,10 +86,10 @@ public class BookServiceTest {
                 .year("1856")
                 .build());
 
-        given(bookRepository.findAll()).willReturn(books);
+            given(bookRepository.findAll()).willReturn(books);
 
-        List<Book> expectedBooks = bookService.findAll();
-        assertEquals(expectedBooks,books);
+            List<Book> expectedBooks = bookService.findAll();
+            assertEquals(expectedBooks,books);
     }
 
     @Test

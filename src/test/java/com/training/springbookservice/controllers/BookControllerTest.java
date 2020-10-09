@@ -1,3 +1,4 @@
+/*
 package com.training.springbookservice.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,6 +61,7 @@ class BookControllerTest {
                 .build();
     }
 
+*/
 /*@Test
     void testGetAllBooks() throws Exception {
         given(bookService.findAll()).willReturn(books);
@@ -67,10 +69,12 @@ class BookControllerTest {
         mockMvc.perform(get("/api/v1/bookService/books"))
                         .andExpect(status().isOk());
 
-    }*/
+    }*//*
 
 
 
+
+*/
 /* @Test
     void testFindBookById() throws Exception {
         given(bookService.findById(book.getId())).willReturn(book);
@@ -79,7 +83,8 @@ class BookControllerTest {
                 book.getId()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-    }*/
+    }*//*
+
 
 
     @Test
@@ -92,7 +97,7 @@ class BookControllerTest {
         //        beerDto.setId(null);
         //        Beer newBeer = Beer.builder().id(UUID.randomUUID()).beerName("Amstel").build();
         //        String beerToJson = objectMapper.writeValueAsString(beerDto);
-        Book newBook = Book.builder()
+                 Book newBook = Book.builder()
                 .id(4l).genre("Horror")
                 .name("Carry").writer("Stephen King")
                 .year("1976").build();
@@ -115,3 +120,4 @@ class BookControllerTest {
     void testDeleteBook() {
     }
 }
+*/
